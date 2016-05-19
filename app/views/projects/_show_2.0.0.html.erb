@@ -1,4 +1,4 @@
-<!-- show_2.0.0 best -->
+<!-- show_2.0.0 -->
 <div class="contextual">
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%= link_to l(:label_subproject_new), {:controller => 'projects', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>

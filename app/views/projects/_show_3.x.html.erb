@@ -1,4 +1,4 @@
-<!-- show_3.0.3 -->
+<!-- show_3.x -->
 <div class="contextual">
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%= link_to l(:label_subproject_new), new_project_path(:parent_id => @project), :class => 'icon icon-add' %>
@@ -30,13 +30,6 @@
   <% end %>
 <!-- Project overview - end -->
 
-<!-- Sub Project list - start -->
-<h2><%=l(:label_overview)%></h2>
-
-<% unless @project.active? %>
-  <p class="warning"><span class="icon icon-lock"><%= l(:text_project_closed) %></span></p>
-<% end %>
-
 <div class="splitcontentleft">
   <% if @project.description.present? %>
   <div class="wiki">
@@ -48,7 +41,27 @@
     <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to h(@project.homepage), @project.homepage %></li>
   <% end %>
 </div>
-<!-- Sub Project list - end -->
+<!-- Project overview - end -->
+
+<!-- Subproject List - Start -->
+<div class="splitcontentleft">
+  <% if @subprojects.any? or render_custom_field_values(@project).any? %>
+    <% unless @project.homepage.blank? %>
+      <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to h(@project.homepage), @project.homepage %></li>
+    <% end %>
+    <% if @subprojects.any? %>
+      <h3><%=l(:label_subproject_plural)%>:</h3>
+      <ul>
+        <li>
+          <%= @subprojects.collect{|p| link_to p, project_path(p)}.join("</li><li>").html_safe %>
+    <% end %>
+    <% render_custom_field_values(@project) do |custom_field, formatted| %>
+      <li><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+<!-- Subproject List - End -->
 
 <!-- Tracker List - Start -->
 <div class="splitcontentright">
@@ -75,7 +88,6 @@
   </div>
   <% end %>
   <%= call_hook(:view_projects_show_left, :project => @project) %>
-
 <!--</div>-->
 <!-- Tracker List - End -->
 

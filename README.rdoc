@@ -12,7 +12,7 @@ The newest version is always at {GitHub}[http://github.com/speedy32129/projects_
 
 == Install
 
-Install using the standard methods for a redmine plugin. However testing is showing if the web server is restarted it's not necessary to run the plugin migrations.
+Install using the standard methods for a redmine plugin. Make sure plugin directory is named "projects_show".  However testing is showing if the web server is restarted it's not necessary to run the plugin migrations.
 
 == Uninstall 
 

@@ -8,7 +8,7 @@ Project Show is a Redmine plugin to show how simple it is to override default vi
 
 == Getting the plugin
 
-The newest version is always at {GitHub}[http://github.com/speedy32129/project_show].
+The newest version is always at {GitHub}[http://github.com/speedy32129/projects_show].
 
 == Install
 

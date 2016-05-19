@@ -1,6 +1,6 @@
 = Redmine Project Show plugin
 
-Project Show is a Redmine plugin to show how simple it is to override default views.  This partial one display the sub-projects in a more readable list instead of the comma separated one.  Doing it within a plugin is better than changing the core as when you go thru updates to Redmine you won't have to go back and make the changes again.
+Project Show is a Redmine plugin to show how simple it is to override default views.  This partial one display the sub-projects in a more readable list instead of the comma separated one.  Doing it within a plugin is better than changing the core as when you go thru updates to Redmine you won't have to go back and make the changes again.  I got tired of having to do this for multiple installs and versions fso I think the plugin is a btter idea.
 
 == Features
 
@@ -12,7 +12,7 @@ The newest version is always at {GitHub}[http://github.com/speedy32129/projects_
 
 == Install
 
-Install using the standard methods for a redmine plugin.
+Install using the standard methods for a redmine plugin. However testing is showing if the web server is restarted it's not necessary to run the plugin migrations.
 
 == Uninstall 
 
@@ -23,6 +23,8 @@ Unstall using the standard methods for a redmine plugin.
 Display a more readable sybproject list.
 
 === Change History
+0.0.2 - Made the plugin multi-version compatible
+
 0.0.1 - Initial creation
 
 

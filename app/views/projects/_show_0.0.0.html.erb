@@ -29,9 +29,9 @@
   <% unless @project.homepage.blank? %>
     <li><%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %></li>
   <% end %>
-<!-- Project overview - end -->
+<!-- Project Overview - end -->
 
-<!-- Sub Project list - start -->
+<!-- Subproject List - start -->
   <% if @subprojects.any? %>
     <h3><%=l(:label_subproject_plural)%>:</h3>
     <li><%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join("</li><li>") %>

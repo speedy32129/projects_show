@@ -1,3 +1,4 @@
+<!-- show_3.x -->
 <div class="contextual">
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%= link_to l(:label_subproject_new), new_project_path(:parent_id => @project), :class => 'icon icon-add' %>
@@ -11,6 +12,7 @@
   <% end %>
 </div>
 
+<!-- Project Overview - start -->
 <h2><%=l(:label_overview)%></h2>
 
 <% unless @project.active? %>
@@ -23,28 +25,27 @@
     <%= textilizable @project.description %>
   </div>
   <% end %>
-</div>
-<div class="splitcontentright">
-  <div class="issues box">
-  <!--<ul>-->
-  <% unless @project.homepage.blank? %>
-    <li><span class="label"><%=l(:field_homepage)%>:</span> <%= link_to h(@project.homepage), @project.homepage %></li>
-  <% end %>
-  <% if @subprojects.any? %>
-    <span class="label"><%=l(:label_subproject_plural)%>:</span>
-    <br />
   <ul>
-    <li>
-      <%= @subprojects.collect{|p| link_to p, project_path(p)}.join("</li><li>").html_safe %>
+  <% unless @project.homepage.blank? %>
+    <li><%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %></li>
+  <% end %>
+<!-- Project Overview - end -->
+
+<!-- Subproject List - start -->
+  <% if @subprojects.any? %>
+    <h3><span class="label"><%=l(:label_subproject_plural)%>:</span></h3>
+    <li><%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join("</li><li>").html_safe %>
   <% end %>
   <% render_custom_field_values(@project) do |custom_field, formatted| %>
     <li><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
   <% end %>
   </ul>
-  </div>
 </div>
-<div class="splitcontentleft">
-  <% if User.current.allowed_to?(:view_issues, @project) %>
+<!-- Subproject List - end -->
+
+<!-- Tracker List - start -->
+<div class="splitcontentright">
+   <% if User.current.allowed_to?(:view_issues, @project) %>
   <div class="issues box">
     <h3><%=l(:label_issue_tracking)%></h3>
     <ul>
@@ -67,9 +68,10 @@
   </div>
   <% end %>
   <%= call_hook(:view_projects_show_left, :project => @project) %>
-</div>
+<!-- Tracker List - end -->
 
-<div class="splitcontentleft">
+<!-- Member List - start -->
+<!--<div class="splitcontentright">-->
   <%= render :partial => 'members_box' %>
 
   <% if @news.any? && authorize_for('news', 'index') %>
@@ -81,13 +83,17 @@
   <% end %>
   <%= call_hook(:view_projects_show_right, :project => @project) %>
 </div>
+<!-- Member List - end -->
 
+<!-- Sidebar - start -->
 <% content_for :sidebar do %>
   <%= render :partial => 'projects/sidebar' %>
 <% end %>
+<!-- Sidebar - end -->
 
 <% content_for :header_tags do %>
 <%= auto_discovery_link_tag(:atom, {:controller => 'activities', :action => 'index', :id => @project, :format => 'atom', :key => User.current.rss_key}) %>
 <% end %>
 
 <% html_title(l(:label_overview)) -%>
+

@@ -6,5 +6,5 @@ Redmine::Plugin.register :projects_show do
   author 'Jim McAleer'
   author_url 'http://github.com/speedy32129'
   description 'This plugin replaces the projects show page and displays a better subproject list.'
-  version '0.0.2'
+  version '0.0.2.1'
 end

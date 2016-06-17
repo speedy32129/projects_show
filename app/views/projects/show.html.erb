@@ -1,7 +1,9 @@
 <% if Redmine::VERSION::MAJOR < 2 %>
-  <%= render :partial => 'show_0.0.0' %>
-<% elsif Redmine::VERSION::MAJOR == 2 and Redmine::VERSION::MINOR < 3 %>
   <%= render :partial => 'show_2.0.0' %>
+<% elsif Redmine::VERSION::MAJOR == 2 and Redmine::VERSION::MINOR < 3 %>
+  <%= render :partial => 'show_2.3.0' %>
+<% elsif Redmine::VERSION::MAJOR == 3 and Redmine::VERSION::MINOR < 2 %>
+  <%= render :partial => 'show_3.2.0' %>
 <% else %>
   <%= render :partial => 'show_3.x' %>
 <% end %>

@@ -1,4 +1,4 @@
-<!-- show_2.0.0 -->
+<!-- show_0.0.0 -->
 <div class="contextual">
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%= link_to l(:label_subproject_new), {:controller => 'projects', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>
@@ -34,20 +34,20 @@
 <!-- Subproject List - start -->
   <% if @subprojects.any? %>
     <h3><%=l(:label_subproject_plural)%>:</h3>
-    <li><%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join("</li><li>").html_safe %>
+    <li><%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join("</li><li>") %>
   <% end %>
   <% if @subprojects.any? %>
     <br /><br />
     <h3>Total: <%=@subprojects.count%></h3>
   <% end %>
-  <% @project.visible_custom_field_values.each do |custom_value| %>
+  <% @project.custom_values.each do |custom_value| %>
   <% if !custom_value.value.blank? %>
      <li><%=h custom_value.custom_field.name %>: <%=h show_value(custom_value) %></li>
   <% end %>
   <% end %>
   </ul>
 </div>
-<!-- Subproject List - end -->
+<!-- Subproject list - end -->
 
 <!-- Tracker List - start -->
 <div class="splitcontentright">
@@ -99,10 +99,10 @@
     <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
     <p>
     <% if User.current.allowed_to?(:log_time, @project) %>
-      <%= link_to l(:button_log_time), new_project_time_entry_path(@project) %> |
+      <%= link_to(l(:label_details), {:controller => 'timelog', :action => 'details', :project_id => @project}) %> |
     <% end %>
-    <%= link_to(l(:label_details), project_time_entries_path(@project)) %> |
-    <%= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>
+    <%= link_to(l(:label_details), {:controller => 'timelog', :action => 'details', :project_id => @project}) %> |
+    <%= link_to(l(:label_report), {:controller => 'timelog', :action => 'report', :project_id => @project}) %></p>
     <% end %>
     <%= call_hook(:view_projects_show_sidebar_bottom, :project => @project) %>
 <% end %>

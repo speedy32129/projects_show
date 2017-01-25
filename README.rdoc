@@ -20,7 +20,7 @@ Unstall using the standard methods for a redmine plugin.
 
 == Usage
 
-Display a more readable sybproject list.
+Display a more readable subproject list.
 
 === Change History
 0.0.2 - Made the plugin multi-version compatible
